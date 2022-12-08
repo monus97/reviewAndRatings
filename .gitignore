@@ -1,0 +1,9 @@
+/node_modules
+/package-lock.json
+/upload
+/.env
+/index2.js
+/index3.js
+/trycatch.js
+/while.js
+/reviewenv
