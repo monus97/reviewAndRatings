@@ -14,6 +14,7 @@ app.use(bodyparser.json());
 app.use(express.json())
 
 const router = require('./routes/commonroutes')
+const testRouter = require('./validation')
 
 
 
@@ -25,12 +26,13 @@ cron.schedule('00 17 * * *',(req,res)=>{
     console.log('hello this is text mail');
 })
 app.use('/',router);
+app.use('/',testRouter)
 
-app.listen(process.env.PORT,(req,res)=>{
+  const server = app.listen(process.env.PORT,(req,res)=>{
     console.log(`running to the port no:${process.env.PORT}`);
 })
 
-
+module.exports = server;
 
 
 

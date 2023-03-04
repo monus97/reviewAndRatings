@@ -5,70 +5,71 @@ const router = express.Router
 const reviewschema = require('../model/reviewschema');
 const { review } = require('../validators/company/companyschema');
 
-const addReview11 = async(req,res)=>{
-    console.log("====>",req.body)
-    const controller = new reviewschema(req.body);
-try{const schema = await controller.save()
-    res.json({ status:200,
-         message : "Add successfully.."
-    })
-    }catch (error){
-    res.json({
-        status : "failed",
-        message : error.message
-    })
-}
-},
- updateReview = async(req,res)=>{
-    console.log(req.body)
-    const reviewid = req.params.id;
-    try{const updateReview =await reviewschema.findByIdAndUpdate(reviewid,req.body,{new:review})
-         res.json({
-            updateReview
-         })
-    }catch(error){
-        res.json({
-            status:200,
-            message:"error",err
-        })
-    }
-},
- deleteReview = async (req,res)=>{
-    await reviewschema.findByIdAndDelete(req.params.id);
-    res.send("delete review successfullty");
+const addReview11 = async (req, res) => {
     try {
-        res.status(200).send().json({
-            status:"success",
-            data :{},
-        });
-    }catch(err){
-        res.status(500).json({
-            status : "failed",
-            message : err,
+        const controller = new reviewschema(req.body);
+        const schema = await controller.save()
+        res.status(200).json({
+            status: "success",
+            message: "Add successfully.."
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: "failed",
+            message: error.message
         })
     }
- } 
+},
+    updateReview = async (req, res) => {
+        const reviewid = req.params.id;
+        try {
+            const updateReview = await reviewschema.findByIdAndUpdate(reviewid, req.body, { new: review })
+            res.status(200).json({
+                status: "success",
+                message: updateReview
+            })
+        } catch (error) {
+            res.status(200).json({
+                status: "failed",
+                message: error.message
+            })
+        }
+    },
+    deleteReview = async (req, res) => {
 
-  const retriveReview = async(req,res)=>{
+        try {
+            await reviewschema.findByIdAndDelete(req.params.id);
+            res.status(200).json({
+                status: "success",
+                message: "review deleted successfull",
+            });
+        } catch (err) {
+            res.status(500).json({
+                status: "failed",
+                message: err.message,
+            })
+        }
+    }
+
+const retriveReview = async (req, res) => {
     const reviewId = req.params.id;
-    try{
+    try {
         getRetrive = await reviewschema.find({
-            _id:`${reviewId}`
+            _id: `${reviewId}`
         },
-        { subject : 1, ratings :1,review : 1, _id :0}
+            { subject: 1, ratings: 1, review: 1, _id: 0 }
         );
-        res.send ({
-            status : 0,
+        res.status(200).json({
+            status: "success",
             getRetrive: "retrive successfull",
         });
-    }catch(err){
-        res.send("error"+err)
+    } catch (err) {
+        res.status(400).json({
+            status: "failed",
+            message: err.message
+        })
     }
- }
+}
 
 
-
-
-
-
-module.exports = {addReview11,updateReview,deleteReview,retriveReview}
+module.exports = { addReview11, updateReview, deleteReview, retriveReview }

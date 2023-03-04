@@ -9,9 +9,8 @@ router.post('/login',validation.userLoginValidation,user.userLogin)
 router.post('/register', upload.single("profilepic"),
 validation.registerUserValidation,user.userSignup)
 router.post("/send-reset-password-email",user.sendUserResetPasswordEmail)
-router.post("/reset-password/:id/:token",user.userPasswordReset)
+router.patch("/reset-password/:id/:token",user.userPasswordReset)
 router.get('/sendMail',user.sendmail)
-//router.post('/Login',user.userLogin)
 
 module.exports = router
 

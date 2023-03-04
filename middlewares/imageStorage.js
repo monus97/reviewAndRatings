@@ -3,7 +3,7 @@ const path = require('path');
 
 const imageconfig = multer.diskStorage({
     destination:(req,file,callback)=>{
-        callback(null,path.join(__dirname,"..","/upload/"));
+        callback(null,path.join(__dirname,"..","/uploads"));
 
     },
     filename:(req,file,callback)=>{
@@ -16,7 +16,7 @@ const isImage = (req,file,callback)=>{
     if(file.mimetype.startsWith("image")){
         callback(null,true);
     }else{
-        callback(new Error("only image is allowd"))
+        callback(new error("only image is allowd"))
     }
 };
 const upload = multer({

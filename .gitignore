@@ -1,6 +1,5 @@
 /node_modules
-/package-lock.json
-/upload
+/package-lock
 /.env
 /index2.js
 /index3.js

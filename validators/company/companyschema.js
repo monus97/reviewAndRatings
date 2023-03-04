@@ -15,7 +15,7 @@ const CompanyValschema = {
     }).unknown(true),
 
 review : joi.object({
-    subject : joi.string().max(15).min(8).required(),
+    subject : joi.string().required(),
     review : joi.string().max(50).min(5).required(),
     ratings : joi.number().integer().max(5).min(1).required(),
     userId : joi.objectId().required(),

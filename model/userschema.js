@@ -26,6 +26,7 @@ const userschema = new mongoose.Schema({
     },
      profilepic:{
          type:String,
+         require : true
      },
     isActive:{
         type:Boolean,
